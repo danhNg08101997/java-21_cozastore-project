@@ -40,7 +40,8 @@ public class DemoUploadFileController {
             StandardCopyOption.REPLACE_EXISTING);
 
     }catch (Exception e){
-    System.out.println("Loi " + e.getLocalizedMessage());
+//    System.out.println("Loi " + e.getLocalizedMessage());
+        throw new CustomFileNotFoundException(500, "Không tìm thấy file");
     }
         return new ResponseEntity<>("", HttpStatus.OK);
     }
