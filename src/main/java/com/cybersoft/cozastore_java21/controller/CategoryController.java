@@ -3,6 +3,7 @@ package com.cybersoft.cozastore_java21.controller;
 import com.cybersoft.cozastore_java21.Service.Imp.CategoryServiceImp;
 import com.cybersoft.cozastore_java21.payload.response.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +23,10 @@ public class CategoryController {
         baseResponse.setData(categoryServiceImp.getAllCategories());
 
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+    @GetMapping("/clear-cache")
+    @CacheEvict(value = "listCategory", allEntries = true)
+    public ResponseEntity<?> clearCache(){
+        return new ResponseEntity<>("",HttpStatus.OK);
     }
 }
